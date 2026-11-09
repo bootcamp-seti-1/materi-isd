@@ -11,7 +11,7 @@ Di akhir Hari 2, **semua peserta punya hasil yang sama**: aplikasi pencatat tuga
 Isi folder proyek:
 
 ```text
-sakura-tasks/
+sakura-tasks-p08/
   main.py            program yang dijalankan
   tugas.py           class Tugas dan PengelolaTugas (modul)
   tasks.json         data tugas, dibuat otomatis saat program jalan
@@ -20,7 +20,7 @@ sakura-tasks/
   pyproject.toml     identitas proyek
 ```
 
-Program dijalankan dari terminal Ubuntu, di folder `~/sakura-tasks`:
+Program dijalankan dari terminal Ubuntu, di folder `~/sakura-tasks-p08`:
 
 ```text
 uv run main.py
@@ -75,7 +75,8 @@ Baris yang diawali `>` diketik **di dalam program**, bukan di terminal Ubuntu. S
 - [ ] Aplikasi **Ubuntu** terbuka dari menu Windows (bukan PowerShell)
 - [ ] Python 3.12, `uv`, dan `git` sudah terpasang (dicek di Bagian A)
 - [ ] VS Code terpasang beserta ekstensi WSL
-- [ ] Akun GitHub dan kunci SSH sudah jalan dari Minggu 1
+- [ ] Sudah menerima undangan organization **bootcamp-seti-1** di GitHub (cek email)
+- [ ] Akun GitHub dan kunci SSH sudah jalan **di Ubuntu** (dicek di Bagian A5; kalau belum, ada langkahnya di A5b)
 - [ ] Aku tahu ID pesertaku (P01 sampai P25)
 
 ## Peta Hari 1 (115 menit)
@@ -83,7 +84,7 @@ Baris yang diawali `>` diketik **di dalam program**, bukan di terminal Ubuntu. S
 | Bagian | Isi | Menit | Hasilnya |
 | --- | --- | --- | --- |
 | A | Orientasi WSL | 20 | Tahu posisi di terminal, folder rumah `~` dikenali |
-| B | Proyek pertama | 15 | Folder `sakura-tasks`, program menyapa jalan |
+| B | Proyek pertama | 15 | Folder `sakura-tasks-p08`, program menyapa jalan |
 | C | List dan perulangan | 15 | Tugas tampil bernomor |
 | D | Fungsi | 15 | `tambah` dan `tampilkan` |
 | E | Program interaktif | 20 | Perintah `add`, `list`, `keluar` |
@@ -124,20 +125,20 @@ Kalimat "menampilkan isi folder" adalah penjelasan, bukan bagian perintah. Kalau
 Bagian di antara `:` dan `$` pada prompt adalah **folder tempat kamu berada sekarang**.
 
 ```text
-nama@LAPTOP:~/sakura-tasks$
+nama@LAPTOP:~/sakura-tasks-p08$
 ```
 
 | Tertulis di prompt | Alamat lengkapnya |
 | --- | --- |
 | `~` | `/home/nama` |
-| `~/sakura-tasks` | `/home/nama/sakura-tasks` |
-| `~/sakura-tasks/main.py` | `/home/nama/sakura-tasks/main.py` |
+| `~/sakura-tasks-p08` | `/home/nama/sakura-tasks-p08` |
+| `~/sakura-tasks-p08/main.py` | `/home/nama/sakura-tasks-p08/main.py` |
 
 Tanda `~` artinya rumahmu di Ubuntu. Kata `nama` diganti nama penggunamu; cek dengan perintah `whoami`.
 
 ### Membaca alamat file
 
-`/home/nama/sakura-tasks/main.py` dibaca dari kiri ke kanan: folder `home`, lalu `nama` (rumahmu), lalu `sakura-tasks` (folder proyek), dan terakhir file `main.py`.
+`/home/nama/sakura-tasks-p08/main.py` dibaca dari kiri ke kanan: folder `home`, lalu `nama` (rumahmu), lalu `sakura-tasks-p08` (folder proyek), dan terakhir file `main.py`.
 
 ### Kamus mini
 
@@ -221,7 +222,29 @@ Prompt-mu sekarang menjadi:
 nama@LAPTOP:~$
 ```
 
-**Aturan emas:** setiap proyek adalah satu folder langsung di bawah `~/`, namanya sama dengan nama proyek. Contoh hari ini: `~/sakura-tasks`. Jangan menyimpannya di `/mnt/c/...`, karena lebih lambat dan sering bermasalah.
+**Aturan emas:** setiap proyek adalah satu folder langsung di bawah `~/`, namanya sama dengan nama proyek. Contoh hari ini: `~/sakura-tasks-p08`. Jangan menyimpannya di `/mnt/c/...`, karena lebih lambat dan sering bermasalah.
+
+### A3b — Membuka file Windows dari Ubuntu (catatan, tidak wajib hari ini)
+
+Drive Windows tampil di Ubuntu sebagai folder di bawah `/mnt/`. Aturannya:
+
+- `C:\` menjadi `/mnt/c/`, `D:\` menjadi `/mnt/d/`
+- Huruf drive **kecil**, dan pemisah folder memakai `/` (bukan `\`)
+- Alamat yang mengandung spasi **wajib diapit tanda kutip**
+
+**Folder:** bebas. **Contoh** (ganti dengan alamat foldermu):
+
+```text
+cd "/mnt/d/My Data/Bootcamp"
+pwd
+ls
+```
+
+Tips:
+
+- Tekan **Tab** setelah mengetik beberapa huruf, Ubuntu melengkapi nama folder sendiri.
+- `explorer.exe .` membuka folder yang sedang aktif di Windows Explorer.
+- Ini hanya untuk **mengambil atau membaca** file. Proyek tetap dibuat di `~/` (aturan emas di atas).
 
 ### A4 — Cek alat
 
@@ -267,7 +290,43 @@ Hi namagithub! You've successfully authenticated, but GitHub does not provide sh
 
 - Baris pertama harus **ID pesertamu** (P01, P02, dan seterusnya), bukan nama asli.
 - Kalau SSH bertanya `Are you sure you want to continue connecting`, ketik `yes` lalu Enter.
-- Kalau ada baris yang kosong atau gagal, itu pengaturan minggu 1 yang belum beres. Tunjukkan ke trainer.
+- Kalau ada baris yang kosong atau gagal, ikuti **A5b** di bawah. Ubuntu adalah sistem terpisah dari Windows, jadi pengaturan Git dan kunci SSH yang dibuat di Windows atau Git Bash tidak ikut terbawa. Setup ulang di Ubuntu itu normal.
+
+### A5b — Setup Git dan SSH di Ubuntu (hanya kalau A5 gagal)
+
+**Folder:** `~`.
+
+**1. Isi identitas Git** (ganti dengan ID pesertamu dan email noreply GitHub-mu):
+
+```text
+git config --global user.name "P08"
+git config --global user.email "123456+namagithub@users.noreply.github.com"
+git config --global init.defaultBranch main
+```
+
+**2. Buat kunci SSH.** Tekan Enter untuk semua pertanyaan (lokasi dan passphrase boleh kosong):
+
+```text
+ssh-keygen -t ed25519 -C "123456+namagithub@users.noreply.github.com"
+```
+
+**3. Tampilkan kunci publik, lalu salin satu baris penuhnya** (diawali `ssh-ed25519`):
+
+```text
+cat ~/.ssh/id_ed25519.pub
+```
+
+Yang disalin harus file berakhiran `.pub`. Jangan pernah membagikan file `id_ed25519` tanpa `.pub`.
+
+**4. Daftarkan di GitHub (di browser):** Settings, **SSH and GPG keys**, **New SSH key**. Title isi `WSL Ubuntu`, tempel kuncinya, klik **Add SSH key**.
+
+**5. Tes lagi:**
+
+```text
+ssh -T git@github.com
+```
+
+Yang harus muncul: `Hi namagithub! You've successfully authenticated...`. Kalau bertanya `Are you sure you want to continue connecting`, ketik `yes`.
 
 ### Titik cek A
 
@@ -280,7 +339,7 @@ Hi namagithub! You've successfully authenticated, but GitHub does not provide sh
 
 ## Bagian B — Proyek pertama dan program yang menyapa (15 menit)
 
-Setelah bagian ini kamu punya folder proyek sakura-tasks dan sudah menjalankan program yang kamu ketik sendiri.
+Setelah bagian ini kamu punya folder proyek sakura-tasks-p08 dan sudah menjalankan program yang kamu ketik sendiri.
 
 ### B1 — Buat proyek
 
@@ -289,19 +348,19 @@ Setelah bagian ini kamu punya folder proyek sakura-tasks dan sudah menjalankan p
 **Ketik** (satu baris per Enter):
 
 ```text
-uv init sakura-tasks --python 3.12
-cd sakura-tasks
+uv init --no-package sakura-tasks-p08 --python 3.12
+cd sakura-tasks-p08
 ls
 ```
 
 **Yang harus muncul di layar:**
 
 ```text
-Initialized project `sakura-tasks` at `/home/nama/sakura-tasks`
+Initialized project `sakura-tasks-p08` at `/home/nama/sakura-tasks-p08`
 README.md  main.py  pyproject.toml
 ```
 
-Urutan tiga nama file di baris terakhir boleh berbeda. Prompt-mu sekarang menjadi `nama@LAPTOP:~/sakura-tasks$`.
+Ganti `p08` dengan ID pesertamu **huruf kecil** (p01 sampai p25). Aturan nama proyek: `sakura-tasks-` diikuti ID-mu. Urutan tiga nama file di baris terakhir boleh berbeda. Prompt-mu sekarang menjadi `nama@LAPTOP:~/sakura-tasks-p08$`.
 
 | File | Isinya |
 | --- | --- |
@@ -309,9 +368,11 @@ Urutan tiga nama file di baris terakhir boleh berbeda. Prompt-mu sekarang menjad
 | `pyproject.toml` | Identitas proyek: nama, versi, versi Python |
 | `README.md` | Catatan perkenalan proyek |
 
+Kata `--no-package` penting. Versi uv terbaru (0.12 ke atas) tanpa flag ini tidak membuat `main.py` di folder proyek, melainkan folder `src/`. Lembar ini memakai bentuk sederhana dengan `main.py`.
+
 ### B2 — Buka proyek di VS Code
 
-**Folder:** `~/sakura-tasks`
+**Folder:** `~/sakura-tasks-p08`
 
 **Ketik:**
 
@@ -327,9 +388,26 @@ code .
 
 Buka terminal di dalam VS Code dengan menekan Ctrl dan tombol backtick (karakter di kiri angka 1). Prompt-nya sama dengan terminal Ubuntu tadi. Mulai sekarang boleh mengetik perintah di terminal VS Code ini.
 
+### B2b — Pastikan ekstensi terpasang di Ubuntu
+
+**Folder:** bebas (kerjakan di jendela VS Code yang tadi terbuka).
+
+1. Tekan **Ctrl + Shift + X** untuk membuka panel Extensions.
+2. Cari **WSL** (penerbit Microsoft). Harus berstatus terpasang. Kalau belum, klik **Install**.
+3. Cari **Python** (penerbit Microsoft). Kalau tombolnya **Install in WSL: Ubuntu**, klik tombol itu.
+4. Kalau ada tawaran memasang ekstensi pendamping, klik **Install**.
+
+**Yang harus terlihat:**
+
+- Python tertulis terpasang di bagian **WSL: Ubuntu** (bukan hanya di "Local").
+- Pojok kiri bawah: **WSL: Ubuntu**.
+- Membuka `main.py` menampilkan kode berwarna (penyorotan sintaks) dan nama interpreter Python 3.12 di pojok kanan bawah. Kalau interpreter tidak muncul, klik tulisan di pojok kanan bawah lalu pilih yang berada di `.venv` proyek.
+
+Ekstensi yang terpasang di Windows tidak otomatis aktif di Ubuntu, jadi langkah 3 tidak boleh dilewati.
+
 ### B3 — Jalankan program contoh
 
-**Folder:** `~/sakura-tasks`
+**Folder:** `~/sakura-tasks-p08`
 
 **Jalankan:**
 
@@ -340,14 +418,14 @@ uv run main.py
 **Yang harus muncul di layar:**
 
 ```text
-Hello from sakura-tasks!
+Hello from sakura-tasks-p08!
 ```
 
 Pertama kali, beberapa baris tentang menyiapkan lingkungan bisa muncul di atasnya. Abaikan. `uv run main.py` artinya: jalankan file `main.py` memakai Python milik proyek ini.
 
 ### B4 — Program pertamamu
 
-**File:** `/home/nama/sakura-tasks/main.py` (sudah ada; kamu mengganti isinya)
+**File:** `/home/nama/sakura-tasks-p08/main.py` (sudah ada; kamu mengganti isinya)
 
 1. Klik `main.py` di panel kiri VS Code.
 2. Tekan Ctrl+A untuk memilih semua isinya, lalu tekan Delete.
@@ -383,7 +461,7 @@ Jalankan sekali lagi dengan namamu sendiri.
 
 ### Titik cek B
 
-- [ ] Folder `~/sakura-tasks` ada dan terbuka di VS Code dengan WSL: Ubuntu
+- [ ] Folder `~/sakura-tasks-p08` ada dan terbuka di VS Code dengan WSL: Ubuntu
 - [ ] `uv run main.py` menyapa namamu
 - [ ] Isi `main.py` persis tiga baris di atas
 
@@ -395,9 +473,9 @@ Setelah bagian ini programmu menyimpan beberapa tugas dalam satu daftar dan mena
 
 ### C1 — Ganti isi main.py
 
-**Folder:** `~/sakura-tasks`
+**Folder:** `~/sakura-tasks-p08`
 
-**File:** `/home/nama/sakura-tasks/main.py` (sudah ada; kamu mengganti isinya)
+**File:** `/home/nama/sakura-tasks-p08/main.py` (sudah ada; kamu mengganti isinya)
 
 1. Klik `main.py` di VS Code, tekan Ctrl+A, lalu Delete.
 2. Ketik isi berikut. Baris kosong di antaranya ikut diketik, cukup tekan Enter.
@@ -449,9 +527,9 @@ Setelah bagian ini kode tambah dan tampil tugas dibungkus dalam fungsi, dan tiap
 
 ### D1 — Ganti isi main.py
 
-**Folder:** `~/sakura-tasks`
+**Folder:** `~/sakura-tasks-p08`
 
-**File:** `/home/nama/sakura-tasks/main.py` (ganti seluruh isinya: Ctrl+A, Delete)
+**File:** `/home/nama/sakura-tasks-p08/main.py` (ganti seluruh isinya: Ctrl+A, Delete)
 
 **Ketik di dalam main.py:**
 
@@ -509,9 +587,9 @@ Setelah bagian ini programmu menunggu perintah yang kamu ketik, jadi tugas bisa 
 
 ### E1 — Ganti bagian bawah main.py
 
-**Folder:** `~/sakura-tasks`
+**Folder:** `~/sakura-tasks-p08`
 
-**File:** `/home/nama/sakura-tasks/main.py`
+**File:** `/home/nama/sakura-tasks-p08/main.py`
 
 Dua fungsi di atas (`tambah` dan `tampilkan`) **tetap**. Yang diganti: hapus tiga baris paling bawah (`tambah("bangun pagi")`, `tambah("sarapan")`, `tampilkan()`), lalu ketik blok baru di bawah fungsi `tampilkan`.
 
@@ -607,9 +685,9 @@ Setelah bagian ini kamu bisa menandai tugas selesai dan melihat ringkasan. Ini v
 
 ### F1 — Tambah dua fungsi dan dua perintah
 
-**Folder:** `~/sakura-tasks`
+**Folder:** `~/sakura-tasks-p08`
 
-**File:** `/home/nama/sakura-tasks/main.py`
+**File:** `/home/nama/sakura-tasks-p08/main.py`
 
 Ketik dua fungsi baru di **antara** fungsi `tampilkan` dan baris `print("sakura-tasks...`. Lalu ubah baris `print` pembuka dan tambah dua cabang di dalam `while`. Paling aman: ganti seluruh isi file dengan versi lengkap di bawah.
 
@@ -729,13 +807,13 @@ Tambah tiga tugas, tandai dua selesai, jalankan `stats`. Angka harus cocok denga
 
 Setelah bagian ini kodemu tersimpan sebagai commit dan ada di GitHub. Ini juga cara trainer melihat pekerjaanmu.
 
-Semua perintah di bagian ini diketik di **terminal VS Code** (atau terminal Ubuntu) dengan prompt berakhir `~/sakura-tasks$`. Kalau terminalmu masih menjalankan program (tanda `>`), ketik `keluar` dulu.
+Semua perintah di bagian ini diketik di **terminal VS Code** (atau terminal Ubuntu) dengan prompt berakhir `~/sakura-tasks-p08$`. Kalau terminalmu masih menjalankan program (tanda `>`), ketik `keluar` dulu.
 
 Perintah `uv init` tadi sudah membuat repo Git di laptopmu, jadi tidak perlu `git init`. Satu proyek = satu repo = satu folder.
 
 ### G1 — Cek status
 
-**Folder:** `~/sakura-tasks`
+**Folder:** `~/sakura-tasks-p08`
 
 **Ketik:**
 
@@ -771,15 +849,17 @@ git log --oneline
 
 1. Buka github.com, login.
 2. Klik tanda `+` kanan atas, pilih **New repository**.
-3. Repository name: `sakura-tasks`.
-4. Pilih **Private**.
-5. **Jangan** centang Add a README, .gitignore, atau license.
-6. Klik **Create repository**.
-7. Buka **Settings**, **Collaborators**, **Add people**, lalu undang username GitHub trainer: `USERNAME-GITHUB-TRAINER`.
+3. Pada **Owner**, pilih organization **bootcamp-seti-1** (bukan akun pribadimu). Kalau pilihan itu tidak ada, undangan organization belum kamu terima: cek emailmu atau kabari trainer.
+4. Repository name: `sakura-tasks-p08` (sama dengan nama folder proyekmu, ID huruf kecil).
+5. Pilih **Private**.
+6. **Jangan** centang Add a README, .gitignore, atau license.
+7. Klik **Create repository**.
+
+Tidak perlu mengundang siapa pun. Trainer otomatis bisa membuka repo di organization.
 
 ### G4 — Kirim kode ke GitHub
 
-Ganti `USERNAMEKAMU` dengan username GitHub-mu, tanpa spasi dan tanpa tanda kurung.
+Ganti `p08` pada nama repo dengan ID pesertamu (huruf kecil). Repo-nya berada di organization `bootcamp-seti-1`, jadi alamatnya tidak memakai username pribadimu.
 
 **Ketik, satu per satu:**
 
@@ -788,7 +868,7 @@ git branch -M main
 ```
 
 ```text
-git remote add origin git@github.com:USERNAMEKAMU/sakura-tasks.git
+git remote add origin git@github.com:bootcamp-seti-1/sakura-tasks-p08.git
 ```
 
 ```text
@@ -804,21 +884,21 @@ Bila ditanya `Are you sure you want to continue connecting`, ketik `yes` lalu En
 ### Titik cek G
 
 - [ ] `git log --oneline` menampilkan commit Hari 1
-- [ ] Repo `sakura-tasks` private ada di GitHub dan berisi `main.py`
-- [ ] Trainer sudah diundang sebagai collaborator
+- [ ] Repo `sakura-tasks-p08` private ada di GitHub dan berisi `main.py`
+- [ ] Repo berada di organization `bootcamp-seti-1` (halaman repo menampilkan `bootcamp-seti-1 / sakura-tasks-p08`)
 - [ ] Aku tahu beda `git add` (pilih file), `git commit` (simpan di laptop), `git push` (kirim ke GitHub)
 
 ### Resep: satu proyek = satu repository
 
-Pola ini dipakai untuk setiap proyek baru. Ganti `NAMA-PROYEK` dengan nama proyek dan `USERNAMEKAMU` dengan username GitHub-mu.
+Pola ini dipakai untuk setiap proyek baru. Ganti `NAMA-PROYEK` dengan nama proyek lengkap beserta ID-mu (contoh `sakura-tasks-p08`). Repo selalu dibuat di organization `bootcamp-seti-1`.
 
 | Langkah | Ketik atau lakukan | Di mana |
 | --- | --- | --- |
-| 1. Buat proyek | `cd ~` lalu `uv init NAMA-PROYEK --python 3.12` | Terminal Ubuntu |
+| 1. Buat proyek | `cd ~` lalu `uv init --no-package NAMA-PROYEK --python 3.12` | Terminal Ubuntu |
 | 2. Masuk ke proyek | `cd NAMA-PROYEK` | Terminal Ubuntu |
 | 3. Commit pertama | `git add .` lalu `git commit -m "Pesan awal"` | Terminal Ubuntu |
-| 4. Buat repo kosong | New repository, nama sama persis `NAMA-PROYEK`, Private, tanpa README | Browser, GitHub |
-| 5. Hubungkan dan kirim | `git branch -M main`, lalu `git remote add origin git@github.com:USERNAMEKAMU/NAMA-PROYEK.git`, lalu `git push -u origin main` | Terminal Ubuntu |
+| 4. Buat repo kosong | New repository, Owner `bootcamp-seti-1`, nama sama persis `NAMA-PROYEK`, Private, tanpa README | Browser, GitHub |
+| 5. Hubungkan dan kirim | `git branch -M main`, lalu `git remote add origin git@github.com:bootcamp-seti-1/NAMA-PROYEK.git`, lalu `git push -u origin main` | Terminal Ubuntu |
 
 `uv init` sudah menjalankan `git init`, jadi jangan menjalankannya lagi dan jangan membuat repo di dalam repo lain. Setelah terhubung, setiap perubahan cukup `git add .`, `git commit -m "..."`, `git push`. Hari 2 melanjutkan proyek dan repo yang sama.
 
@@ -828,7 +908,7 @@ Pola ini dipakai untuk setiap proyek baru. Ganti `NAMA-PROYEK` dengan nama proye
 
 ### Target minimal Hari 1
 
-- [ ] Proyek `sakura-tasks` ada di `~/` (bukan `/mnt/c/`)
+- [ ] Proyek `sakura-tasks-p08` ada di `~/` (bukan `/mnt/c/`)
 - [ ] `uv run main.py` menjalankan program interaktif
 - [ ] Perintah `add`, `list`, `done`, `stats`, `keluar` jalan
 - [ ] Ada satu commit, dan repo private ada di GitHub
@@ -840,14 +920,16 @@ Belum semua tercentang? Tidak masalah. Kerjakan terus sesuai kecepatanmu, dan ka
 | Yang kamu lihat | Penyebab | Yang diketik / dilakukan |
 | --- | --- | --- |
 | `command not found: uv` | uv belum terpasang atau terminal belum dimuat ulang | Tutup terminal, buka lagi, coba `uv --version`. Kalau tetap gagal, kabari trainer |
-| `No such file or directory: main.py` | Terminal ada di folder yang salah | `cd ~/sakura-tasks`, lalu `ls` harus menampilkan `main.py` |
+| `No such file or directory: main.py` | Terminal ada di folder yang salah | `cd ~/sakura-tasks-p08`, lalu `ls` harus menampilkan `main.py` |
 | `IndentationError` atau `unexpected indent` | Jorokan tidak 4 spasi, atau campur Tab dan spasi | Cek baris yang disebut error, rapikan jadi 4 atau 8 spasi |
 | `SyntaxError` | Titik dua, tanda kurung, atau tanda kutip kurang | Lihat baris yang ditunjuk panah `^`, bandingkan dengan lembar ini huruf demi huruf |
 | `NameError: name 'xxx' is not defined` | Salah ketik nama, atau fungsi dipanggil sebelum dibuat | Cocokkan ejaan dengan lembar ini; fungsi harus ditulis di atas pemanggilnya |
 | Program tidak menanggapi apa pun | Program menunggu input di tanda `>` | Ketik perintah, atau `keluar` |
-| `Permission denied (publickey)` saat `git push` | Kunci SSH belum terdaftar di GitHub | Kabari trainer, tempel pesan lengkapnya |
-| `Author identity unknown` saat commit | user.name dan user.email belum diatur | Ulangi setup Git di Bagian A |
-| Pesan `remote origin already exists` | Perintah `git remote add` sudah pernah diketik | `git remote set-url origin git@github.com:USERNAMEKAMU/sakura-tasks.git` |
+| `Permission denied (publickey)` saat `git push` atau `ssh -T` | Ubuntu belum punya kunci SSH, atau kuncinya belum didaftarkan di GitHub | Ikuti langkah A5b. Kalau masih gagal, kabari trainer dan tempel pesan lengkapnya |
+| Tidak ada `main.py` setelah `uv init` (yang muncul folder `src/`) | Lupa flag `--no-package` | Hapus folder proyeknya (`rm -rf NAMA-PROYEK`), lalu ulangi `uv init --no-package NAMA-PROYEK --python 3.12` |
+| `Author identity unknown` saat commit | user.name dan user.email belum diatur | Ulangi langkah 1 di A5b |
+| `No such file or directory` saat `cd /mnt/d/...` | Lupa tanda kutip pada alamat berspasi, huruf drive besar, atau salah ketik nama folder | Apit alamat dengan `"..."`, pakai `/mnt/d` (huruf kecil), gunakan Tab untuk melengkapi (lihat A3b) |
+| Pesan `remote origin already exists` | Perintah `git remote add` sudah pernah diketik | `git remote set-url origin git@github.com:bootcamp-seti-1/sakura-tasks-p08.git` |
 
 ### Jalur kejar
 

@@ -13,7 +13,7 @@ Keluaran minggu ini: **Python mini application** bernama `sakura-tasks` (pencata
 ## Hasil akhir yang dikejar semua peserta (akhir Hari 2)
 
 ```text
-sakura-tasks/
+sakura-tasks-p08/
   main.py
   tugas.py
   tasks.json
@@ -22,4 +22,4 @@ sakura-tasks/
   pyproject.toml
 ```
 
-Tiap peserta membuat repo `sakura-tasks` sendiri di akun GitHub-nya dan mengundang trainer sebagai collaborator.
+Tiap peserta membuat repo sendiri di organization GitHub `bootcamp-seti-1` (peserta harus sudah menjadi member org). Trainer otomatis punya akses, jadi tidak perlu undangan collaborator. **Penamaan seragam:** `<nama-proyek>-<id-peserta>` dengan ID huruf kecil, contoh `sakura-tasks-p08`. Nama yang sama dipakai untuk folder di `~/` dan nama repo.
