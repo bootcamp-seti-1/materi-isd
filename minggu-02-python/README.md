@@ -7,8 +7,8 @@ Keluaran minggu ini: **Python mini application** bernama `sakura-tasks` (pencata
 | Hari | Lembar | Isi | Status |
 | --- | --- | --- | --- |
 | 1 | [hari-1-hands-on.md](hari-1-hands-on.md) | Bangun `main.py` interaktif: list, fungsi, `add`/`list`/`done`/`stats`, commit dan push | siap |
-| 2 | hari-2-hands-on.md | Rapikan jadi modul dan class, simpan ke JSON, tes pytest | belum |
-| 3 | hari-3-tugas-mandiri.md | Tugas mandiri, trainer memantau | belum |
+| 2 | [hari-2-hands-on.md](hari-2-hands-on.md) | Pisah jadi modul, class `Tugas` dan `PengelolaTugas` (OOP), perbandingan prosedural vs OOP, latihan, kuis | draf |
+| 3 | - | Studi kasus dari trainer (tidak ada lembar di folder ini) | belum |
 
 ## Hasil akhir yang dikejar semua peserta (akhir Hari 2)
 
@@ -16,9 +16,6 @@ Keluaran minggu ini: **Python mini application** bernama `sakura-tasks` (pencata
 sakura-tasks-p08/
   main.py
   tugas.py
-  tasks.json
-  tests/
-    test_tugas.py
   pyproject.toml
 ```
 
