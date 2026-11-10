@@ -1,6 +1,6 @@
 # Hari 2 — Hands-on: modul dan OOP di sakura-tasks
 
-Hari ini kamu merapikan program Hari 1 dalam dua tahap: **dipecah jadi modul**, lalu **diubah jadi class (OOP)**. Perilaku program tidak berubah. Yang berubah adalah cara kodenya disusun. Aturan mainnya sama seperti Hari 1: ikuti langkah berurutan, ketik persis, cocokkan hasilmu di setiap titik cek. Penjelasan disampaikan trainer sambil mengetik.
+Hari ini kamu merapikan program Hari 1 dalam dua tahap: **dipecah jadi modul**, lalu **diubah jadi class (OOP)**. Perilaku program tidak berubah. Yang berubah adalah cara kodenya disusun. Aturan mainnya sama seperti Hari 1: ikuti langkah berurutan, ketik persis, cocokkan hasilmu dengan **Yang harus muncul di layar**. Penjelasan disampaikan trainer sambil mengetik.
 
 ## Tujuan hari ini
 
@@ -33,28 +33,20 @@ Data tugas masih hilang saat program ditutup. Itu normal. Penyimpanan data punya
 
 Belum selesai Hari 1? Buka lembar Hari 1, salin **Isi lengkap main.py setelah bagian F** ke `main.py`, jalankan, dan mulai dari Bagian A di bawah.
 
-## Peta Hari 2 (±115 menit)
+## Peta Hari 2 (±120 menit)
 
 | Bagian | Isi | Menit | Hasilnya |
 | --- | --- | --- | --- |
 | A | Pemanasan | 8 | Titik awal sama untuk semua |
 | B | Modul | 25 | Fungsi pindah ke `tugas.py`, `main.py` memanggilnya |
-| C | OOP 1: class `Tugas` | 25 | Satu tugas jadi objek |
+| C | OOP 1: class `Tugas` | 28 | Satu tugas jadi objek |
 | D | OOP 2: class `PengelolaTugas` | 25 | Daftar dan fungsi jadi satu objek, variabel global hilang |
 | E | Perbandingan prosedural dan OOP | 8 | Tahu kapan memakai yang mana |
 | F | Latihan: perintah `hapus` | 8 | Method baru buatanmu sendiri |
 | G | Git dan GitHub | 8 | Commit kedua di repo yang sama |
-| H | Kuis | 8 | 8 soal pilihan ganda |
+| H | Kuis | 10 | 10 soal pilihan ganda |
 
-## Aturan main
-
-1. Ikuti bagian dari A sampai H, berurutan.
-2. Ketik hanya isi kotak **Ketik**. Sisanya dibaca saja. Kotak **Penjelasan singkat** dibaca sekilas sambil trainer bicara.
-3. Setiap bagian ditutup **Titik cek**. Cocok? Lanjut.
-4. Tertinggal? Pakai **Jalur kejar** di bagian bawah, tidak perlu menunggu siapa pun.
-5. Stuck? Tulis di grup: ID, bagian, dan tempel pesan error. Contoh: "P08 stuck di C1".
-
-Label **Folder**, **File**, **Ketik**, **Jalankan**, **Yang harus muncul di layar**, dan **Titik cek** artinya sama dengan Hari 1. Ada satu tambahan:
+Label **Folder**, **File**, **Ketik**, **Jalankan**, dan **Yang harus muncul di layar** artinya sama dengan Hari 1. Ada satu tambahan:
 
 | Tanda | Artinya |
 | --- | --- |
@@ -130,12 +122,6 @@ Buka `main.py` di VS Code (`code .` kalau belum terbuka). Perhatikan tiga hal:
 
 Hari ini kita rapikan tiga hal itu satu per satu.
 
-### Titik cek A
-
-- [ ] `git status` menampilkan `working tree clean`
-- [ ] Program Hari 1 jalan: `add` dan `list` bekerja
-- [ ] Aku bisa menyebut satu hal yang membuat `main.py` makin sulit dirawat kalau terus bertambah panjang
-
 ---
 
 ## Bagian B — Modul: pisahkan kode ke file sendiri (25 menit)
@@ -151,22 +137,12 @@ Setelah bagian ini programmu tersusun dari dua file dan jalan persis seperti Har
 
 ### B1 — Buat file tugas.py
 
-**Folder:** `~/sakura-tasks-p08`
+**Di VS Code** (proyek `sakura-tasks-p08` sudah terbuka dari Hari 1):
 
-**Ketik:**
+1. Di panel kiri, klik ikon **New File** (kertas dengan tanda plus), atau klik kanan area kosong di panel kiri lalu pilih **New File**.
+2. Ketik nama `tugas.py`, lalu tekan Enter.
 
-```text
-touch tugas.py
-ls
-```
-
-**Yang harus muncul di layar:**
-
-```text
-README.md  main.py  pyproject.toml  tugas.py
-```
-
-Urutan nama file boleh berbeda. Folder `.venv` tidak tampil karena namanya diawali titik.
+File kosong `tugas.py` muncul di panel kiri, sejajar dengan `main.py`.
 
 ### B2 — Isi tugas.py dengan fungsi-fungsi dari main.py
 
@@ -293,18 +269,11 @@ Setelah itu kembalikan lagi menjadi `Ditambahkan:`.
 
 **Kata baru:** modul, `import`, `tugas.tambah(...)` (isi modul dipanggil dengan titik).
 
-### Titik cek B
-
-- [ ] `ls` menampilkan `main.py` dan `tugas.py`
-- [ ] Hasil `uv run main.py` sama persis dengan Hari 1
-- [ ] Aku bisa menjelaskan kenapa sekarang menulis `tugas.tambah(...)`, bukan `tambah(...)`
-- [ ] Mengubah pesan di `tugas.py` berubah di program tanpa menyentuh `main.py`
-
 ---
 
-## Bagian C — OOP 1: class Tugas (25 menit)
+## Bagian C — OOP 1: class Tugas (28 menit)
 
-> **Penjelasan singkat (10 menit)**
+> **Penjelasan singkat (12 menit)**
 >
 > - Bayangkan **formulir tugas**. Formulir kosong yang sama dicetak untuk semua orang itu **class**. Formulir yang sudah diisi (judul "bangun pagi", belum selesai) itu **objek**. Satu class bisa menghasilkan banyak objek, dan tiap objek punya isinya sendiri.
 > - Di Hari 1 satu tugas adalah dictionary: `{"judul": ..., "selesai": ...}`. Sekarang satu tugas adalah **objek `Tugas`** yang membawa datanya (atribut) **dan** kemampuannya (method).
@@ -319,6 +288,112 @@ Setelah itu kembalikan lagi menjadi `Ditambahkan:`.
 | `self.judul` | Atribut `judul` milik objek ini |
 | `def tandai_selesai(self):` | Method: fungsi yang melekat pada objek |
 | `__str__` | Method khusus: menentukan tulisan objek saat di-`print` |
+
+### OOP dalam kehidupan sehari-hari
+
+Bayangkan kamu mengelola **papan sticky note** di kantor Sakura Soft. Setiap tugas ditulis di satu sticky note.
+
+| Di dunia nyata | Di kode |
+| --- | --- |
+| Cetakan sticky note: kertas berformat dengan kolom judul dan kotak centang | class `Tugas` |
+| Satu sticky note yang sudah ditulisi "sarapan" | Objek `Tugas("sarapan")` |
+| Tulisan judul dan centang di note itu | Atribut `judul` dan `selesai` |
+| Aksi mencentang note | Method `tandai_selesai()` |
+| Saat note baru ditulis: judul diisi, kotak centang dibiarkan kosong | `__init__` |
+| "Note yang sedang kamu pegang" | `self` |
+| Papan yang menyimpan banyak note dan tahu cara menambah, menampilkan, mencentang, dan menghitungnya | class `PengelolaTugas` (Bagian D) |
+| Tumpukan note di papan itu | `self.daftar` |
+
+**`self` itu seperti kata "saya".** Kalau Budi bilang "saya lapar", yang lapar Budi. Kalau Ani mengucapkan kalimat yang sama, yang lapar Ani. Kata "saya" selalu menunjuk siapa yang sedang bicara. Begitu juga `self`: di dalam method, `self` menunjuk objek yang sedang memanggilnya. Itu sebabnya `a.tandai_selesai()` hanya mencentang note `a`, bukan note `b`.
+
+**Kenapa data dan kemampuan disatukan?** Ambil contoh rekening tabungan. Saldo (data) dan aturan "tidak boleh menarik lebih dari saldo" (kemampuan) sebaiknya berada di tempat yang sama, supaya aturannya tidak terlewat. Contoh ini **dibaca saja, tidak diketik**:
+
+```python
+class Rekening:
+    def __init__(self, pemilik, saldo):
+        self.pemilik = pemilik
+        self.saldo = saldo
+
+    def tarik(self, jumlah):
+        if jumlah > self.saldo:
+            print("Saldo tidak cukup")
+            return
+        self.saldo -= jumlah
+        print(f"Saldo sekarang {self.saldo}")
+
+
+budi = Rekening("Budi", 100000)
+ani = Rekening("Ani", 500000)
+budi.tarik(150000)
+ani.tarik(150000)
+```
+
+Hasilnya:
+
+```text
+Saldo tidak cukup
+Saldo sekarang 350000
+```
+
+Rekening Budi (saldo 100000) menolak penarikan 150000, sedangkan rekening Ani (saldo 500000) berhasil. Dua objek, dua saldo, satu aturan yang ditulis sekali di dalam class. Di gaya prosedural, saldo dan fungsi tarik berdiri terpisah, jadi lebih mudah ada kode lain yang mengubah saldo tanpa melewati aturan itu.
+
+### Apakah OOP harus Java?
+
+**Tidak.** OOP adalah **cara menyusun program**, bukan fitur milik satu bahasa. Banyak bahasa mendukungnya. Konsepnya sama (class, objek, atribut, method), yang berbeda hanya cara menulisnya.
+
+| Bahasa | Mendukung OOP? | Catatan |
+| --- | --- | --- |
+| Python | Ya | Boleh prosedural atau OOP, bebas dicampur (seperti Hari 1 dan Hari 2) |
+| Java | Ya | Dirancang berorientasi objek, hampir semua kode ditulis di dalam class |
+| C# | Ya | Mirip Java |
+| JavaScript / TypeScript | Ya | Punya `class`, tapi bisa juga ditulis tanpa class |
+| PHP, C++, Kotlin, Swift, Ruby | Ya | |
+| C | Tidak punya class | Bahasa prosedural: program ditulis dengan fungsi dan `struct` |
+
+Class `Tugas` yang sama dalam tiga bahasa. **Dibaca saja, tidak diketik:**
+
+```python
+# Python
+class Tugas:
+    def __init__(self, judul):
+        self.judul = judul
+        self.selesai = False
+
+    def tandai_selesai(self):
+        self.selesai = True
+```
+
+```java
+// Java
+class Tugas {
+    String judul;
+    boolean selesai = false;
+
+    Tugas(String judul) {
+        this.judul = judul;
+    }
+
+    void tandaiSelesai() {
+        this.selesai = true;
+    }
+}
+```
+
+```javascript
+// JavaScript
+class Tugas {
+  constructor(judul) {
+    this.judul = judul;
+    this.selesai = false;
+  }
+
+  tandaiSelesai() {
+    this.selesai = true;
+  }
+}
+```
+
+Perhatikan: kerangkanya sama (class, data awal, satu method). Yang berbeda hanya ejaan: Python memakai `__init__` dan `self` yang ditulis jelas di parameter, Java dan JavaScript memakai `constructor` (di Java, nama class) dan `this`, dan Java menulis tipe data seperti `String` dan `boolean`. Setelah paham di Python, berpindah ke bahasa lain sebagian besar tinggal belajar ejaannya.
 
 Setelah bagian ini satu tugas adalah objek, dan program tetap berjalan seperti sebelumnya.
 
@@ -450,13 +525,6 @@ Perhatikan: `a` sudah ditandai selesai, tetapi `b` tidak ikut berubah. Dua objek
 Masuk lagi dengan `uv run python`, lalu buat objek ketiga dengan judulmu sendiri, misalnya `c = Tugas("olahraga")`. Ketik `print(c.judul)` dan `print(c.selesai)`. Harus muncul judulmu, lalu `False`. Keluar dengan `exit()`.
 
 **Kata baru:** class, objek, atribut, method, `__init__`, `self`, `__str__`.
-
-### Titik cek C
-
-- [ ] `uv run main.py` menampilkan hasil yang sama persis dengan Bagian B
-- [ ] Di Python interaktif, `a` selesai sedangkan `b` tetap belum
-- [ ] Aku bisa menjelaskan beda class (cetakan) dan objek (hasil cetakan)
-- [ ] Aku bisa menjelaskan fungsi `self` dengan kata-kataku sendiri
 
 ---
 
@@ -624,13 +692,6 @@ Masuk lagi dengan `uv run python`. Buat dua pengelola, tambahkan tugas yang **be
 
 **Kata baru:** method, `self.daftar` (atribut milik objek), `from ... import`.
 
-### Titik cek D
-
-- [ ] `uv run main.py` menampilkan hasil yang sama persis dengan Bagian B
-- [ ] Tidak ada lagi variabel global `daftar` atau `tugas` di `tugas.py`
-- [ ] `a` dan `b` punya daftar sendiri-sendiri
-- [ ] Aku bisa menjelaskan kenapa fungsi `tambah` sekarang punya parameter `self`
-
 ---
 
 ## Bagian E — Prosedural vs OOP (8 menit)
@@ -677,11 +738,6 @@ Keduanya bukan soal benar atau salah. Python mendukung dua-duanya, dan program n
 2. Kapan kamu **tetap memilih** gaya prosedural, walau sudah tahu OOP?
 
 > **Sekilas tentang pewarisan (inheritance).** Class baru bisa mengambil semua atribut dan method dari class lama, lalu menambah atau mengubah sebagian. Contoh: `TugasPrioritas` bisa mewarisi `Tugas` dan hanya menambahkan tanda khusus. Ini **tidak dikerjakan** hari ini. Cukup tahu bahwa istilahnya ada.
-
-### Titik cek E
-
-- [ ] Aku bisa menyebut satu kelebihan dan satu kekurangan masing-masing gaya
-- [ ] Aku bisa menunjuk bagian mana di sakura-tasks yang prosedural (Hari 1) dan mana yang OOP (Hari 2)
 
 ---
 
@@ -732,12 +788,6 @@ Nomor tidak ada
 
 Selesai lebih cepat? Ubah kalimat pembuka di `main.py` supaya `hapus NOMOR` ikut tertulis.
 
-### Titik cek F
-
-- [ ] `hapus 1` menghapus tugas pertama dan menampilkan `Dihapus: ...`
-- [ ] `hapus 9` (nomor tidak ada) menampilkan `Nomor tidak ada`
-- [ ] `hapus` ada sebagai method di `PengelolaTugas`, bukan fungsi lepas
-
 ---
 
 ## Bagian G — Simpan ke Git dan GitHub (8 menit)
@@ -787,15 +837,9 @@ e4f5a6b Hari 1: sakura-tasks interaktif
 
 **Cek di browser:** muat ulang halaman repo `bootcamp-seti-1 / sakura-tasks-p08`. File `tugas.py` harus terlihat.
 
-### Titik cek G
-
-- [ ] `git log --oneline` menampilkan dua commit
-- [ ] Repo di GitHub berisi `main.py` dan `tugas.py`
-- [ ] `git status` menampilkan `working tree clean`
-
 ---
 
-## Bagian H — Kuis (8 menit)
+## Bagian H — Kuis (10 menit)
 
 Kerjakan sendiri tanpa membuka lembar ini. Pilih satu jawaban (A sampai D) untuk tiap soal. Kumpulkan jawabanmu dengan cara yang diarahkan trainer.
 
@@ -874,18 +918,25 @@ Yang terjadi adalah …
 - C. Mencetak satu kalimat ke layar
 - D. Aplikasi dengan banyak entitas yang masing-masing punya data dan perilakunya sendiri, seperti tugas, pengguna, dan pesanan
 
+**Soal 9.** Pernyataan yang benar tentang OOP dan bahasa pemrograman adalah …
+
+- A. OOP adalah cara menyusun program yang bisa dipakai di banyak bahasa, misalnya Python, Java, JavaScript, dan C#
+- B. OOP hanya bisa dipakai di Java
+- C. Python tidak mendukung OOP
+- D. OOP wajib memakai kata `self` di semua bahasa
+
+**Soal 10.** Pada analogi papan sticky note, `Tugas("sarapan")` mewakili …
+
+- A. Cetakan sticky note yang masih kosong
+- B. Papan yang menyimpan semua sticky note
+- C. Satu sticky note yang sudah ditulisi "sarapan"
+- D. Aksi mencentang sticky note
+
 ---
 
-## Titik cek akhir Hari 2 dan jika ada masalah
+## Jika ada masalah
 
-### Target minimal Hari 2
-
-- [ ] `tugas.py` berisi class `Tugas` dan `PengelolaTugas`
-- [ ] `main.py` memakai `from tugas import PengelolaTugas` dan satu objek `pengelola`
-- [ ] `uv run main.py` jalan dengan hasil yang sama seperti Hari 1
-- [ ] Commit Hari 2 sudah di-push ke GitHub
-
-Belum semua tercentang? Tidak masalah. Kerjakan terus sesuai kecepatanmu, dan kabari trainer di grup dengan menyebut **bagian mana** (contoh: "P08 stuck di C1") serta tempel pesan error di terminal.
+Kabari trainer di grup dengan menyebut **bagian mana** (contoh: "P08 stuck di C1") serta tempel pesan error di terminal.
 
 ### Masalah yang sering muncul
 
@@ -906,7 +957,7 @@ Belum semua tercentang? Tidak masalah. Kerjakan terus sesuai kecepatanmu, dan ka
 
 ### Jalur kejar
 
-Tertinggal beberapa bagian? Tidak perlu mengetik ulang semuanya. Salin file lengkap dari **titik cek terakhir yang berhasil kamu lewati**:
+Tertinggal beberapa bagian? Tidak perlu mengetik ulang semuanya. Salin file lengkap dari **bagian terakhir yang berhasil kamu selesaikan**:
 
 | Posisi terakhirmu | Salin ke `tugas.py` | Salin ke `main.py` |
 | --- | --- | --- |
