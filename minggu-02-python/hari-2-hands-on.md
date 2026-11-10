@@ -841,7 +841,9 @@ e4f5a6b Hari 1: sakura-tasks interaktif
 
 ## Bagian H — Kuis (10 menit)
 
-Kerjakan sendiri tanpa membuka lembar ini. Pilih satu jawaban (A sampai D) untuk tiap soal. Kumpulkan jawabanmu dengan cara yang diarahkan trainer.
+Kerjakan sendiri tanpa membuka lembar ini. Pilih satu jawaban (A sampai D) untuk tiap soal. Jawabanmu dikumpulkan lewat Google Form: https://forms.gle/hMwNCVotRWcPDZTV9
+
+Di formulir itu, isi **ID pesertamu** (contoh: P08), bukan nama.
 
 **Soal 1.** Kamu punya file `tugas.py` berisi fungsi `tambah`. Supaya `main.py` bisa memanggil `tugas.tambah("sarapan")`, baris yang dipakai di `main.py` adalah …
 
@@ -886,23 +888,12 @@ print(b)
 - C. `[ ] mandi` lalu `[ ] makan`
 - D. Error
 
-**Soal 6.** Seorang peserta menulis method tanpa `self`, lalu memanggilnya dari objek `t` yang sudah dibuat dengan `t = Tugas()`:
+**Soal 6.** Setelah menulis `from tugas import PengelolaTugas` di `main.py`, cara membuat objek pengelola adalah …
 
-```python
-class Tugas:
-    def tandai_selesai():
-        pass
-
-t = Tugas()
-t.tandai_selesai()
-```
-
-Yang terjadi adalah …
-
-- A. Tidak terjadi apa-apa
-- B. Tugas ditandai selesai
-- C. `TypeError`, karena Python mengirim objek sebagai argumen pertama sedangkan method tidak menerimanya
-- D. `NameError`, karena `t` tidak ada
+- A. `tugas.PengelolaTugas()`
+- B. `new PengelolaTugas()`
+- C. `import PengelolaTugas()`
+- D. `PengelolaTugas()`
 
 **Soal 7.** Pernyataan yang menggambarkan pemrograman **prosedural** adalah …
 
@@ -925,12 +916,12 @@ Yang terjadi adalah …
 - C. Python tidak mendukung OOP
 - D. OOP wajib memakai kata `self` di semua bahasa
 
-**Soal 10.** Pada analogi papan sticky note, `Tugas("sarapan")` mewakili …
+**Soal 10.** Keuntungan memakai class `PengelolaTugas` dibanding satu variabel global `daftar` adalah …
 
-- A. Cetakan sticky note yang masih kosong
-- B. Papan yang menyimpan semua sticky note
-- C. Satu sticky note yang sudah ditulisi "sarapan"
-- D. Aksi mencentang sticky note
+- A. Program otomatis berjalan lebih cepat
+- B. Data tugas otomatis tersimpan ke file
+- C. Bisa punya beberapa pengelola yang masing-masing punya daftar sendiri
+- D. Tidak perlu lagi memakai `self`
 
 ---
 
