@@ -1,0 +1,14 @@
+add siapkan slide
+add kirim undangan
+add pesan konsumsi
+add cek proyektor
+done 1
+done 2
+done 3
+undone 2
+undone 4
+undone 9
+undone abc
+stats
+list
+keluar

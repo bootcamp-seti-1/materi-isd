@@ -1,0 +1,13 @@
+add rapat tim
+add kirim laporan
+add review kode
+add makan siang
+done 2
+update 1 rapat vendor
+update 2 laporan bulanan
+update 9 apa saja
+update abc apa saja
+update 3
+update 4    
+list
+keluar
