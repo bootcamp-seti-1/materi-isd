@@ -1,6 +1,6 @@
-import Tugas
+import tugas
 
-pengelola = Tugas.PengelolaTugas()
+pengelola = PengelolaTugas()
 
 pengelola.tambah("siapkan ruangan")
 pengelola.tambah("cek proyektor")
