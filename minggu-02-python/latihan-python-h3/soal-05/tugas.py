@@ -28,10 +28,10 @@ class PengelolaTugas:
             print(f"{nomor}. {item}")
 
     def selesai(self, nomor):
-        if nomor < 1 or nomor > len(self.daftar):
+        if nomor < 1 or nomor >= len(self.daftar):
             print("Nomor tidak ada")
             return
-        item = self.daftar[nomor-1]
+        item = self.daftar[nomor]
         item.tandai_selesai()
         print(f"Selesai: {item.judul}")
 
