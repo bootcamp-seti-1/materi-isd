@@ -13,9 +13,5 @@ class Tarif:
         - Durasi GRATIS_MENIT atau kurang: gratis, yaitu 0 jam dan biaya 0.
         - Selebihnya dibulatkan ke atas per jam, dan biaya tidak boleh melebihi MAKSIMUM.
         """
-        if durasi <= GRATIS_MENIT:
-            return 0, 0
-
-        jam = (durasi + 59) // 60
-        biaya = JAM_PERTAMA + (jam - 1) * JAM_BERIKUTNYA
-        return jam, min(biaya, MAKSIMUM)
+        # TODO: tulis perhitungannya di sini
+        return 0, 0
