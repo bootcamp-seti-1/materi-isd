@@ -2,15 +2,15 @@ tugas = []
 
 
 def tambah(judul):
-judul = judul.strip()
-    if judul = "":
+    judul = judul.strip()
+    if judul == "" :
         print("Judul tidak boleh kosong")
         return
     tugas.append({"judul": judul, "selesai": False})
 
 
 def selesai(nomor):
-    if nomor < 1 or nomor > len(tugas)
+    if nomor < 1 or nomor > len(tugas):
         print("Nomor tidak ada")
         return
     tugas[nomor - 1]["selesai"] = True

@@ -4,6 +4,7 @@ JAM_BERIKUTNYA = 2000
 GRATIS_MENIT = 15
 MAKSIMUM = 20000
 
+import math
 
 class Tarif:
     def hitung(self, durasi):
@@ -14,4 +15,15 @@ class Tarif:
         - Selebihnya dibulatkan ke atas per jam, dan biaya tidak boleh melebihi MAKSIMUM.
         """
         # TODO: tulis perhitungannya di sini
-        return 0, 0
+        if durasi <= GRATIS_MENIT:
+            return 0, 0
+        jam = math.ceil(durasi / 60)
+        if jam == 1:
+            biaya = JAM_PERTAMA
+        else:
+            biaya = JAM_PERTAMA + (jam - 1) * JAM_BERIKUTNYA
+
+        if biaya > MAKSIMUM:
+            biaya = MAKSIMUM
+
+        return jam, biaya
