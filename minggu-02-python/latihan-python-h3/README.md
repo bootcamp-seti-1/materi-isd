@@ -6,12 +6,12 @@ Sepuluh soal latihan dari materi Hari 1 dan Hari 2 (proyek `sakura-tasks`): 3 so
 pelajari.
 
 ## Cara memakai
-1. Clone repo ini ke folder home di Ubuntu (WSL), lalu masuk ke foldernya.
+1. Clone repo ini ke folder, lalu masuk ke foldernya.
 2. Kerjakan soal per folder: buka `soal-NN/SOAL.md`, baca ceritanya, lalu kerjakan di file
    yang ada di folder itu.
 3. Jalankan programmu dengan `uv run NAMA_FILE.py`. Kalau soal memberi `masukan.txt`,
    jalankan dengan `uv run main.py < masukan.txt`.
-4. Kirim jawabannya ke CTFd sesuai format yang tertulis di akhir tiap soal.
+4. Kirim jawabannya ke CTFd sesuai format yang tertulis di akhir tiap soal > http://192.168.1.28:8000.
 
 ## Pilih targetmu
 
