@@ -1,4 +1,5 @@
 import mysql.connector
+from typing import Any
 
 DB_CONFIG = {
     "host": "127.0.0.1",
@@ -12,7 +13,7 @@ def get_connection():
     return mysql.connector.connect(**DB_CONFIG)
 
 
-def fetch_all(sql, params=()):
+def fetch_all(sql, params=()) -> list[Any]:
     conn = get_connection()
     try:
         cur = conn.cursor(dictionary=True)
