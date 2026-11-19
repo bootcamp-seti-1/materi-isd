@@ -1,0 +1,1 @@
+-- Soal 4: tulis perintah SELECT-mu di bawah baris ini, diakhiri titik koma.
