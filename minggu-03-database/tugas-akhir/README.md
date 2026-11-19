@@ -12,7 +12,7 @@ Ada dua sesi, masing-masing **60 menit**, dikerjakan di kelas.
 1. Buka terminal Ubuntu, lalu jalankan `sudo service mysql start`.
 2. Kerjakan soal per folder: `sesi-1-ctfd/soal-01` sampai `soal-10`. Buka `SOAL.md` di folder itu, baca ceritanya, lalu ikuti langkah awalnya.
 3. Jawabannya teks pendek. Format jawaban ada di bagian "Cara menjawab" pada tiap soal.
-4. Kirim jawabanmu ke CTFd: http://192.168.1.28:8000
+4. Kirim jawabanmu ke CTFd: http://192.168.1.34:8000
 
 Poin tiap soal: easy 100, medium 200, hard 300. Kamu tidak harus mengerjakan semuanya. Pilih soal sesuai poin yang ingin kamu kejar. Panduan lengkap dan daftar soal ada di `sesi-1-ctfd/README.md`.
 
