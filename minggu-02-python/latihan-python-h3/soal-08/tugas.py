@@ -12,8 +12,8 @@ class Tugas:
 
 
 class PengelolaTugas:
-    def __init__(self, daftar=[]):
-        self.daftar = daftar
+    def __init__(self):
+        self.daftar = []
 
     def tambah(self, judul):
         judul = judul.strip()

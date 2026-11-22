@@ -14,6 +14,8 @@ while True:
         pengelola.ringkasan()
     elif perintah.startswith("add "):
         pengelola.tambah(perintah[4:])
+    elif perintah.startswith("undone "):
+        pengelola.undone(perintah[7:])
     elif perintah.startswith("done "):
         nomor = perintah[5:]
         if nomor.isdigit():

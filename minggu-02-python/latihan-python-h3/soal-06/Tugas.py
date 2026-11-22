@@ -1,4 +1,4 @@
-class Tugas:
+class Tugas_satu:
     def __init__(self, judul):
         self.judul = judul
         self.selesai = False
@@ -20,7 +20,7 @@ class PengelolaTugas:
         if judul == "":
             print("Judul tidak boleh kosong")
             return
-        self.daftar.append(Tugas(judul))
+        self.daftar.append(Tugas_satu(judul))
         print(f"Ditambahkan: {judul}")
 
     def tampilkan(self):

@@ -16,4 +16,6 @@ for item in rumah.daftar:
     if item.selesai:
         selesai_di_rumah += 1
 
+# kerja.tampilkan()
+kerja.tampilkan()
 print(len(kerja.daftar), len(rumah.daftar), selesai_di_rumah)
