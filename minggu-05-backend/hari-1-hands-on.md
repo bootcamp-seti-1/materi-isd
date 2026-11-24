@@ -34,10 +34,10 @@ Lalu API bisa dicoba dari browser di `http://localhost:8000/docs` dan dari termi
 
 ## Persiapan sebelum mulai
 
-- [ ] Laptop terhubung internet dan baterai aman untuk 2 jam
-- [ ] Repo `seti-isd-materi` sudah ada di `~/seti-isd-materi` dan sudah `git pull`
-- [ ] VS Code dan `uv` sudah terpasang (sama seperti minggu 3)
-- [ ] Aku tahu ID pesertaku, ditulis huruf kecil (contoh: `p01`)
+- [✓] Laptop terhubung internet dan baterai aman untuk 2 jam
+- [✓] Repo `seti-isd-materi` sudah ada di `~/seti-isd-materi` dan sudah `git pull`
+- [✓] VS Code dan `uv` sudah terpasang (sama seperti minggu 3)
+- [✓] Aku tahu ID pesertaku, ditulis huruf kecil (contoh: `p01`)
 
 ## Peta Hari 1 (120 menit)
 
@@ -189,8 +189,8 @@ Mode `dev` otomatis me-restart server setiap kali file disimpan. Kamu tidak perl
 
 ### Titik cek A
 
-- [ ] `http://localhost:8000` menampilkan pesan JSON
-- [ ] `http://localhost:8000/docs` terbuka
+- [✓] `http://localhost:8000` menampilkan pesan JSON
+- [✓] `http://localhost:8000/docs` terbuka
 
 **Dibahas trainer:** apa itu API dan kenapa frontend tidak boleh langsung ke database; apa itu framework; kenapa FastAPI.
 
@@ -229,10 +229,10 @@ Baris yang diawali `>` adalah **request** (dikirim curl). Baris yang diawali `<`
 
 | Pertanyaan | Jawabanmu |
 | --- | --- |
-| Method apa yang dipakai? | |
-| Path apa yang diminta? | |
-| Status code berapa? | |
-| Header apa yang menyatakan isi response berbentuk JSON? | |
+| Method apa yang dipakai? | GET |
+| Path apa yang diminta? | / |
+| Status code berapa? | 200 |
+| Header apa yang menyatakan isi response berbentuk JSON? | content-length: 58 content-type: application/json |
 
 ### B2 — Minta alamat yang tidak ada
 
@@ -252,9 +252,9 @@ curl -i -X DELETE http://localhost:8000/
 
 ### Titik cek B
 
-- [ ] B1 menunjukkan `200 OK` dan `content-type: application/json`
-- [ ] B2 menunjukkan `404 Not Found`
-- [ ] B3 menunjukkan `405 Method Not Allowed`
+- [✓] B1 menunjukkan `200 OK` dan `content-type: application/json`
+- [✓] B2 menunjukkan `404 Not Found`
+- [✓] B3 menunjukkan `405 Method Not Allowed`
 
 **Dibahas trainer:**
 
@@ -274,14 +274,14 @@ Di industri, bentuk API disepakati dulu dengan tim frontend sebelum ditulis kode
 | --- | --- | --- | --- | --- |
 | 1 | `GET` | `/v1/tasks` | Daftar task (bisa difilter) | `200` |
 | 2 | `GET` | `/v1/tasks/{task_id}` | Detail satu task | `200` |
-| 3 | `?` | `/v1/tasks` | Membuat task baru | `?` |
-| 4 | `PUT` | `?` | Mengganti seluruh isi satu task | `200` |
-| 5 | `?` | `/v1/tasks/{task_id}` | Mengubah sebagian isi task, misalnya status saja | `200` |
-| 6 | `DELETE` | `/v1/tasks/{task_id}` | Menghapus task | `?` |
+| 3 | `POST` | `/v1/tasks` | Membuat task baru | `200` |
+| 4 | `PUT` | `/v1/tasks/{task_id}` | Mengganti seluruh isi satu task | `200` |
+| 5 | `PATCH` | `/v1/tasks/{task_id}` | Mengubah sebagian isi task, misalnya status saja | `200` |
+| 6 | `DELETE` | `/v1/tasks/{task_id}` | Menghapus task | `204` |
 | 7 | `GET` | `/v1/projects` | Daftar project | `200` |
-| 8 | `GET` | `?` | Semua task milik satu project | `200` |
+| 8 | `GET` | `GET` | Semua task milik satu project | `200` |
 
-Kalau task yang diminta tidak ada, status code-nya `?`.
+Kalau task yang diminta tidak ada, status code-nya `404 Not Found`.
 
 <details>
 <summary>Kunci (buka setelah dibahas)</summary>
@@ -300,7 +300,7 @@ GET /v1/tasks?limit=2&offset=2          2 task, mulai dari urutan ke-3
 
 ### Titik cek C
 
-- [ ] Semua `?` di tabel sudah terisi dan cocok dengan kunci
+- [✓] Semua `?` di tabel sudah terisi dan cocok dengan kunci
 
 **Dibahas trainer:**
 
@@ -452,11 +452,11 @@ curl -i http://localhost:8000/v1/tasks/abc
 
 ### Titik cek D
 
-- [ ] `?status=todo` hanya mengembalikan 3 task (id 3, 4, 5)
-- [ ] `?limit=2&offset=2` mengembalikan task id 3 dan 4
-- [ ] `?limit=500` ditolak dengan `422`
-- [ ] `/v1/tasks/99` → `404` dengan `{"detail":"Task 99 tidak ditemukan"}`
-- [ ] `/v1/tasks/abc` → `422`, karena `task_id` harus angka
+- [✓] `?status=todo` hanya mengembalikan 3 task (id 3, 4, 5)
+- [✓] `?limit=2&offset=2` mengembalikan task id 3 dan 4
+- [✓] `?limit=500` ditolak dengan `422`
+- [✓] `/v1/tasks/99` → `404` dengan `{"detail":"Task 99 tidak ditemukan"}`
+- [✓] `/v1/tasks/abc` → `422`, karena `task_id` harus angka
 
 **Dibahas trainer:**
 
@@ -556,11 +556,11 @@ curl -i -X POST http://localhost:8000/v1/tasks -H "Content-Type: application/jso
 
 ### Titik cek E
 
-- [ ] Task baru dibuat dengan `201 Created` dan mendapat `id` 7
-- [ ] `GET /v1/tasks/7` menampilkan task itu
-- [ ] Body tanpa `title` → `422`, pesannya menyebut `title` dan `Field required`
-- [ ] `status` selain `todo`/`doing`/`done` → `422`
-- [ ] `project_id` 99 → `400` dengan `Project 99 tidak ada`
+- [✓] Task baru dibuat dengan `201 Created` dan mendapat `id` 7
+- [✓] `GET /v1/tasks/7` menampilkan task itu
+- [✓] Body tanpa `title` → `422`, pesannya menyebut `title` dan `Field required`
+- [✓] `status` selain `todo`/`doing`/`done` → `422`
+- [✓] `project_id` 99 → `400` dengan `Project 99 tidak ada`
 
 **Dibahas trainer:**
 
@@ -626,10 +626,10 @@ curl -i -X DELETE http://localhost:8000/v1/tasks/5
 
 ### Titik cek F
 
-- [ ] PATCH mengubah status task 3 menjadi `doing`, field lain tetap
-- [ ] PUT task 3 tanpa `priority` dan `status` membuat keduanya kembali ke default (`2` dan `todo`)
-- [ ] DELETE pertama → `204 No Content`, DELETE kedua → `404`
-- [ ] Semua endpoint muncul di `/docs`
+- [✓] PATCH mengubah status task 3 menjadi `doing`, field lain tetap
+- [✓] PUT task 3 tanpa `priority` dan `status` membuat keduanya kembali ke default (`2` dan `todo`)
+- [✓] DELETE pertama → `204 No Content`, DELETE kedua → `404`
+- [✓] Semua endpoint muncul di `/docs`
 
 **Dibahas trainer:**
 
@@ -723,11 +723,11 @@ class Project(BaseModel):
 
 ### Titik cek G
 
-- [ ] Server jalan lagi tanpa error setelah `main.py` diganti
-- [ ] Di `/docs`, endpoint terkelompok menjadi **projects** dan **tasks**
-- [ ] `curl -s http://localhost:8000/v1/projects/1/tasks | python3 -m json.tool` mengembalikan task milik project 1
-- [ ] `curl -i http://localhost:8000/v1/projects/99/tasks` → `404`
-- [ ] `curl -i "http://localhost:8000/v1/tasks?status=selesai"` → `422`
+- [✓] Server jalan lagi tanpa error setelah `main.py` diganti
+- [✓] Di `/docs`, endpoint terkelompok menjadi **projects** dan **tasks**
+- [✓] `curl -s http://localhost:8000/v1/projects/1/tasks | python3 -m json.tool` mengembalikan task milik project 1
+- [✓] `curl -i http://localhost:8000/v1/projects/99/tasks` → `404`
+- [✓] `curl -i "http://localhost:8000/v1/tasks?status=selesai"` → `422`
 
 **Dibahas trainer:**
 
@@ -780,11 +780,11 @@ Pastikan folder `.venv` **tidak** ikut ter-push. File `.gitignore` buatan `uv in
 
 ### Target minimal Hari 1
 
-- [ ] Server jalan dengan `uv run fastapi dev main.py`
-- [ ] Ke-8 endpoint di tabel Bagian C bekerja dan muncul di `/docs`
-- [ ] Kamu bisa membaca output `curl -v`: mana request, mana response, berapa status code-nya
-- [ ] Kamu bisa menjelaskan ke trainer: beda `404` dan `422`, beda PUT dan PATCH, kenapa POST mengembalikan `201`
-- [ ] Pekerjaanmu sudah di-push dan terlihat di GitHub
+- [✓] Server jalan dengan `uv run fastapi dev main.py`
+- [✓] Ke-8 endpoint di tabel Bagian C bekerja dan muncul di `/docs`
+- [✓] Kamu bisa membaca output `curl -v`: mana request, mana response, berapa status code-nya
+- [✓] Kamu bisa menjelaskan ke trainer: beda `404` dan `422`, beda PUT dan PATCH, kenapa POST mengembalikan `201`
+- [✓] Pekerjaanmu sudah di-push dan terlihat di GitHub
 
 ### Masalah yang sering muncul
 
