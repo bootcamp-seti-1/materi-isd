@@ -60,3 +60,9 @@ class Project(BaseModel):
     id: int
     name: str
     client: str
+
+class RingkasanProject(BaseModel):
+    project_id: int
+    todo: int
+    doing: int
+    done: int

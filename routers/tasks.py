@@ -1,6 +1,5 @@
 from fastapi import APIRouter, HTTPException, Query
 
-from data import TASKS, id_berikutnya
 from db import execute, fetch_all, fetch_one, insert
 from schemas import Status, Task, TaskCreate, TaskUpdate
 
@@ -78,3 +77,31 @@ def ubah_sebagian_task(task_id: int, body: TaskUpdate):
             (*perubahan.values(), task_id),
         )
     return cari_task(task_id)
+
+@router.put("/{task_id}", response_model=Task)
+def ganti_task(task_id: int, body: TaskCreate):
+    cari_task(task_id)
+    pastikan_project_ada(body.project_id)
+    execute(
+        "UPDATE tasks SET project_id = %s, title = %s, status = %s, "
+        "priority = %s, due_date = %s WHERE id = %s",
+        (
+            body.project_id,
+            body.title,
+            body.status,
+            body.priority,
+            body.due_date,
+            task_id,
+        ),
+    )
+    return cari_task(task_id)
+
+
+@router.delete("/{task_id}", status_code=204)
+def hapus_task(task_id: int):
+    jumlah = execute("DELETE FROM tasks WHERE id = %s", (task_id,))
+    if jumlah == 0:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Task {task_id} tidak ditemukan",
+        )
