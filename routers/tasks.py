@@ -1,70 +1,80 @@
 from fastapi import APIRouter, HTTPException, Query
 
-from data import PROJECTS, TASKS, id_berikutnya
+from data import TASKS, id_berikutnya
+from db import execute, fetch_all, fetch_one, insert
 from schemas import Status, Task, TaskCreate, TaskUpdate
 
 router = APIRouter(prefix="/v1/tasks", tags=["tasks"])
 
+KOLOM = "id, project_id, title, status, priority, due_date, created_at"
+
 
 def cari_task(task_id: int) -> dict:
-    for t in TASKS:
-        if t["id"] == task_id:
-            return t
-    raise HTTPException(status_code=404, detail=f"Task {task_id} tidak ditemukan")
+    task = fetch_one(f"SELECT {KOLOM} FROM tasks WHERE id = %s", (task_id,))
+    if task is None:
+        raise HTTPException(status_code=404, detail=f"Task {task_id} tidak ditemukan")
+    return task
 
 
 def pastikan_project_ada(project_id: int) -> None:
-    if not any(p["id"] == project_id for p in PROJECTS):
+    if fetch_one("SELECT id FROM projects WHERE id = %s", (project_id,)) is None:
         raise HTTPException(status_code=400, detail=f"Project {project_id} tidak ada")
 
 
 @router.get("", response_model=list[Task])
 def daftar_task(
     status: Status | None = None,
-    priority: int | None = None,
+    priority: int | None = Query(default=None, ge=1, le=3),
     limit: int = Query(default=10, ge=1, le=100),
     offset: int = Query(default=0, ge=0),
 ):
-    hasil = TASKS
+    syarat = []
+    params = []
     if status is not None:
-        hasil = [t for t in hasil if t["status"] == status]
+        syarat.append("status = %s")
+        params.append(status)
     if priority is not None:
-        hasil = [t for t in hasil if t["priority"] == priority]
-    return hasil[offset : offset + limit]
+        syarat.append("priority = %s")
+        params.append(priority)
+
+    where = f"WHERE {' AND '.join(syarat)}" if syarat else ""
+    sql = f"SELECT {KOLOM} FROM tasks {where} ORDER BY id LIMIT %s OFFSET %s"
+    params += [limit, offset]
+    return fetch_all(sql, tuple(params))
 
 
 @router.get("/{task_id}", response_model=Task)
 def detail_task(task_id: int):
     return cari_task(task_id)
 
-
 @router.post("", response_model=Task, status_code=201)
 def buat_task(body: TaskCreate):
     pastikan_project_ada(body.project_id)
-    task_baru = {"id": id_berikutnya(TASKS), **body.model_dump()}
-    TASKS.append(task_baru)
-    return task_baru
-
-
-@router.put("/{task_id}", response_model=Task)
-def ganti_task(task_id: int, body: TaskCreate):
-    task = cari_task(task_id)
-    pastikan_project_ada(body.project_id)
-    task.update(body.model_dump())
-    return task
-
+    id_baru = insert(
+        "INSERT INTO tasks (project_id, title, status, priority, due_date) "
+        "VALUES (%s, %s, %s, %s, %s)",
+        (body.project_id, body.title, body.status, body.priority, body.due_date),
+    )
+    return cari_task(id_baru)
 
 @router.patch("/{task_id}", response_model=Task)
 def ubah_sebagian_task(task_id: int, body: TaskUpdate):
-    task = cari_task(task_id)
+    cari_task(task_id)
     perubahan = body.model_dump(exclude_unset=True)
+
+    tidak_boleh_null = [k for k, v in perubahan.items() if v is None and k != "due_date"]
+    if tidak_boleh_null:
+        raise HTTPException(
+            status_code=422,
+            detail=f"Field {', '.join(tidak_boleh_null)} tidak boleh null",
+        )
     if "project_id" in perubahan:
         pastikan_project_ada(perubahan["project_id"])
-    task.update(perubahan)
-    return task
 
-
-@router.delete("/{task_id}", status_code=204)
-def hapus_task(task_id: int):
-    task = cari_task(task_id)
-    TASKS.remove(task)
+    if perubahan:
+        set_sql = ", ".join(f"{kolom} = %s" for kolom in perubahan)
+        execute(
+            f"UPDATE tasks SET {set_sql} WHERE id = %s",
+            (*perubahan.values(), task_id),
+        )
+    return cari_task(task_id)
