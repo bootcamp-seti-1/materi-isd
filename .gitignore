@@ -1,0 +1,5 @@
+*JANGAN-DI-PUSH*
+__pycache__/
+*.pyc
+.env
+.venv/
