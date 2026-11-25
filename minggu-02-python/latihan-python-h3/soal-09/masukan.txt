@@ -1,0 +1,10 @@
+add Rapat tim
+add rapat dengan klien
+add Bayar listrik
+add siapkan RAPAT mingguan
+add makan siang
+done 2
+cari rapat
+cari bayar
+cari tidur
+keluar
