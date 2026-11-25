@@ -10,9 +10,10 @@ class Koperasi:
         2. nominal bukan bilangan bulat 1 atau lebih -> cetak "Nominal tidak valid"
         Kalau lolos, saldo siswa bertambah sebesar nominal. Tidak mencetak apa pun."""
         # TODO
-        if not fetch_all("SELECT * FROM students WHERE name = %s", (nama,)):
+        if not fetch_all("SELECT * FROM students WHERE name = %s", (nama,)): 
             print("Siswa tidak ditemukan")
             return
+        # harusnya tambahin BINARY setelah WHERE name = %s biar case sensitive seperti beda antara Andi dan andi
 
         if isinstance(nominal, bool) or not isinstance(nominal, (int, str)):
             print("Nominal tidak valid")
