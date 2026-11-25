@@ -1,14 +1,15 @@
+
 from fastapi import APIRouter, HTTPException, Query
 
 from db import execute, fetch_all, fetch_one, insert
 from schemas import Status, Task, TaskCreate, TaskUpdate
-
 
 router = APIRouter(prefix="/v1/tasks", tags=["tasks"])
 
 KOLOM = "id, project_id, title, status, priority, due_date, created_at"
 
 
+# Mencari task berdasarkan ID
 def cari_task(task_id: int) -> dict:
     task = fetch_one(
         f"SELECT {KOLOM} FROM tasks WHERE id = %s",
@@ -24,6 +25,7 @@ def cari_task(task_id: int) -> dict:
     return task
 
 
+# Memastikan project tersedia di MySQL
 def pastikan_project_ada(project_id: int) -> None:
     project = fetch_one(
         "SELECT id FROM projects WHERE id = %s",
@@ -37,6 +39,7 @@ def pastikan_project_ada(project_id: int) -> None:
         )
 
 
+# GET: Menampilkan semua task
 @router.get("", response_model=list[Task])
 def daftar_task(
     status: Status | None = None,
@@ -70,11 +73,13 @@ def daftar_task(
     return fetch_all(sql, tuple(params))
 
 
+# GET: Detail task
 @router.get("/{task_id}", response_model=Task)
 def detail_task(task_id: int):
     return cari_task(task_id)
 
 
+# POST: Menambahkan task baru
 @router.post("", response_model=Task, status_code=201)
 def buat_task(body: TaskCreate):
     pastikan_project_ada(body.project_id)
@@ -91,12 +96,43 @@ def buat_task(body: TaskCreate):
             body.status,
             body.priority,
             body.due_date
-        ),
+        )
     )
 
     return cari_task(id_baru)
 
 
+# PUT: Mengganti seluruh data task
+@router.put("/{task_id}", response_model=Task)
+def ganti_task(task_id: int, body: TaskCreate):
+    cari_task(task_id)
+
+    pastikan_project_ada(body.project_id)
+
+    execute(
+        """
+        UPDATE tasks
+        SET project_id = %s,
+            title = %s,
+            status = %s,
+            priority = %s,
+            due_date = %s
+        WHERE id = %s
+        """,
+        (
+            body.project_id,
+            body.title,
+            body.status,
+            body.priority,
+            body.due_date,
+            task_id
+        )
+    )
+
+    return cari_task(task_id)
+
+
+# PATCH: Mengubah sebagian data task
 @router.patch("/{task_id}", response_model=Task)
 def ubah_sebagian_task(task_id: int, body: TaskUpdate):
     cari_task(task_id)
@@ -111,7 +147,7 @@ def ubah_sebagian_task(task_id: int, body: TaskUpdate):
     if tidak_boleh_null:
         raise HTTPException(
             status_code=422,
-            detail=f"Field {', '.join(tidak_boleh_null)} tidak boleh null",
+            detail=f"Field {', '.join(tidak_boleh_null)} tidak boleh null"
         )
 
     if "project_id" in perubahan:
@@ -124,7 +160,20 @@ def ubah_sebagian_task(task_id: int, body: TaskUpdate):
 
         execute(
             f"UPDATE tasks SET {set_sql} WHERE id = %s",
-            (*perubahan.values(), task_id),
+            (*perubahan.values(), task_id)
         )
 
     return cari_task(task_id)
+
+
+# DELETE: Menghapus task
+@router.delete("/{task_id}", status_code=204)
+def hapus_task(task_id: int):
+    cari_task(task_id)
+
+    execute(
+        "DELETE FROM tasks WHERE id = %s",
+        (task_id,)
+    )
+
+    return None
