@@ -121,7 +121,7 @@ cd minggu-05-backend
 ```
 
 ```text
-uv init sakura-api-p00
+uv init --no-package sakura-api-p00
 ```
 
 ```text

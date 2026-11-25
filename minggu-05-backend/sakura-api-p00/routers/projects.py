@@ -20,6 +20,7 @@ def daftar_project():
 
 @router.get("/{project_id}", response_model=Project)
 def detail_project(project_id: int):
+    ur_nf= env.get("url_nf")
     return cari_project(project_id)
 
 
