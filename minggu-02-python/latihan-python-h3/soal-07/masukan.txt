@@ -1,0 +1,8 @@
+add! deploy server
+add cek log
+add! backup database
+add laporan mingguan
+done 1
+done 2
+list
+keluar

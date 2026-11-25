@@ -1,0 +1,8 @@
+[project]
+name = "koperasi-sekolah"
+version = "0.1.0"
+description = "Koperasi sekolah SD Harapan"
+requires-python = ">=3.12"
+dependencies = [
+    "mysql-connector-python",
+]

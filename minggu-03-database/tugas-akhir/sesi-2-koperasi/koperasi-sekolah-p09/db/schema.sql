@@ -1,0 +1,27 @@
+DROP TABLE IF EXISTS purchases;
+DROP TABLE IF EXISTS items;
+DROP TABLE IF EXISTS students;
+
+CREATE TABLE students (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) NOT NULL UNIQUE,
+  balance INT NOT NULL DEFAULT 0
+);
+
+CREATE TABLE items (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) NOT NULL UNIQUE,
+  price INT NOT NULL,
+  stock INT NOT NULL DEFAULT 0
+);
+
+CREATE TABLE purchases (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  student_id INT NOT NULL,
+  item_id INT NOT NULL,
+  qty INT NOT NULL,
+  total INT NOT NULL,
+  status ENUM('ok', 'batal') NOT NULL DEFAULT 'ok',
+  FOREIGN KEY (student_id) REFERENCES students(id),
+  FOREIGN KEY (item_id) REFERENCES items(id)
+);
