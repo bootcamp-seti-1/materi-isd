@@ -1,10 +1,3 @@
-"""Data sementara di memori (Hari 1).
-
-Bentuknya sama dengan tabel `projects` dan `tasks` di MySQL minggu 3,
-supaya di Hari 2 tinggal diganti ke database tanpa mengubah endpoint.
-Data ini hilang setiap server di-restart.
-"""
-
 from datetime import date
 
 PROJECTS = [
@@ -24,5 +17,4 @@ TASKS = [
 
 
 def id_berikutnya(rows):
-    """Meniru AUTO_INCREMENT: id terbesar + 1."""
     return max((r["id"] for r in rows), default=0) + 1
