@@ -1,0 +1,9 @@
+[project]
+name = "kantin-sekolah"
+version = "0.1.0"
+description = "API kantin sekolah (tugas akhir minggu 5)"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.115.0",
+    "mysql-connector-python>=26.10.0",
+]
