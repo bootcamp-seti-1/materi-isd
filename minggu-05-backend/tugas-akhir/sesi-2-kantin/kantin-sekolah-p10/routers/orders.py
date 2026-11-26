@@ -12,20 +12,64 @@ KOLOM = "id, menu_id, qty, total, status, created_at"
 
 # ---------- TODO: kerjakan sesuai README ----------
 
+def _ambil_pesanan(order_id: int) -> dict:
+    pesanan = fetch_one(f"SELECT {KOLOM} FROM kantin_orders WHERE id = %s", (order_id,))
+    if pesanan is None:
+        raise HTTPException(status_code=404, detail=f"Pesanan {order_id} tidak ditemukan")
+    return pesanan
 
 @router.post("", response_model=Order, status_code=201)
 def buat_pesanan(body: OrderCreate):
-    raise HTTPException(status_code=501, detail="Belum dibuat")
+
+    menu = fetch_one(
+        "SELECT id, price, stock FROM kantin_menus WHERE id = %s",
+        (body.menu_id,),
+    )
+
+    if menu is None:
+        raise HTTPException(status_code=400, detail="Menu tidak ditemukan")
+
+    if menu["stock"] < body.qty:
+        raise HTTPException(status_code=409, detail="Stok tidak cukup")
+
+    subtotal = menu["price"] * body.qty
+    total = subtotal * (100 - aturan.DISKON_PERSEN) // 100 if subtotal >= aturan.BATAS_DISKON else subtotal
+
+    execute(
+        "UPDATE kantin_menus SET stock = stock - %s WHERE id = %s",
+        (body.qty, body.menu_id),
+    )
+
+    order_id = insert(
+        "INSERT INTO kantin_orders (menu_id, qty, total, status) VALUES (%s, %s, %s, 'baru')",
+        (body.menu_id, body.qty, total),
+    )
+
+    return _ambil_pesanan(order_id)
+
 
 
 @router.get("/{order_id}", response_model=Order)
 def detail_pesanan(order_id: int):
-    raise HTTPException(status_code=501, detail="Belum dibuat")
+    return _ambil_pesanan(order_id)
 
 
 @router.post("/{order_id}/batal", response_model=Order)
 def batalkan_pesanan(order_id: int):
-    raise HTTPException(status_code=501, detail="Belum dibuat")
+    pesanan = _ambil_pesanan(order_id)
+
+    if pesanan["status"] == "batal":
+        raise HTTPException(status_code=409, detail="Pesanan sudah dibatalkan")
+
+    execute(
+        "UPDATE kantin_orders SET status = 'batal' WHERE id = %s",
+        (order_id,),
+    )
+    execute(
+        "UPDATE kantin_menus SET stock = stock + %s WHERE id = %s",
+        (pesanan["qty"], pesanan["menu_id"]),
+    )
+    return _ambil_pesanan(order_id)
 
 
 # ---------- TODO bonus ----------

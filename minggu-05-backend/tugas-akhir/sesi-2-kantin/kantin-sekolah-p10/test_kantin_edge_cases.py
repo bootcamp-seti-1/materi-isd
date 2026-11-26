@@ -176,15 +176,17 @@ def test_patch_self_name_and_empty_body(client: TestClient):
 
 
 def test_failed_order_keeps_stock_and_discount_threshold(client: TestClient):
-    before_stock = client.get("/v1/menus/2").json()["stock"]  # Mi Ayam: price=10000, stock=15
+    before_stock = client.get("/v1/menus/3").json()["stock"]  # Roti Bakar: price=8000, stock=0
+    qty_to_try = min(aturan.QTY_MAX, before_stock + 1)  # 1, within QTY_MIN..QTY_MAX
 
     # 409 insufficient stock should not change stock
-    r_fail = client.post("/v1/orders", json={"menu_id": 2, "qty": before_stock + 1})
+    r_fail = client.post("/v1/orders", json={"menu_id": 3, "qty": qty_to_try})
     require_implemented(r_fail, feature="POST /v1/orders")
     assert r_fail.status_code == 409
-    assert client.get("/v1/menus/2").json()["stock"] == before_stock
+    assert r_fail.json().get("detail") == "Stok tidak cukup"
+    assert client.get("/v1/menus/3").json()["stock"] == before_stock
 
-    # Exact BATAS_DISKON (e.g. 5 * 10000 = 50000) gets discount
+    # Exact BATAS_DISKON (e.g. Mi Ayam id=2: 5 * 10000 = 50000) gets discount
     r_exact = client.post("/v1/orders", json={"menu_id": 2, "qty": 5})
     assert r_exact.status_code == 201
     subtotal = 10000 * 5
