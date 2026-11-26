@@ -45,9 +45,49 @@ def detail_menu(menu_id: int):
 
 @router.post("", response_model=Menu, status_code=201)
 def buat_menu(body: MenuCreate):
-    raise HTTPException(status_code=501, detail="Belum dibuat")
+    exist = fetch_one("SELECT id FROM kantin_menus WHERE LOWER(name) = LOWER(%s)", (body.name,))
+    
+    # Check if exist
+    if exist is not None:
+        raise HTTPException(status_code=409, detail="Nama menu sudah ada")
+
+    # Proceed to POST to db
+    new_id = insert(
+        "INSERT INTO kantin_menus (name, category, price, stock) VALUES (%s, %s, %s, %s)",
+        (body.name, body.category, body.price, body.stock)
+    )
+    return cari_menu(new_id)
 
 
 @router.patch("/{menu_id}", response_model=Menu)
 def ubah_menu(menu_id: int, body: MenuUpdate):
-    raise HTTPException(status_code=501, detail="Belum dibuat")
+    cari_menu(menu_id) # lookup id, already raise 404 if not found
+
+    # Hold the thingy
+    payload = body.model_dump(exclude_unset=True)
+
+    # Check null value
+    for field, nilai in payload.items():
+        if nilai is None:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Field '{field}' tidak boleh null",
+            )
+    
+    # Check if name already exist (no duplicate menu :angy: )
+    if "name" in payload:
+        kembar = fetch_one(
+            "SELECT id FROM kantin_menus WHERE LOWER(name) = LOWER(%s) AND id != %s",
+            (payload["name"], menu_id),
+        )
+        # Raise 409 if name exist
+        if kembar is not None:
+            raise HTTPException(status_code=409, detail="Nama menu sudah ada")
+
+    # Dynamic SQL UPDATE prep
+    if payload:     # Kick the empty bucket
+        set_clause = ", ".join(f"{kolom} = %s" for kolom in payload)            # SET clause on UPDATE (uses %s for the placeholder)
+        params = tuple(list(payload.values()) + [menu_id])                      # Build the param values (to fill the positional %s)
+        execute(f"UPDATE kantin_menus SET {set_clause} WHERE id = %s", params)  # Send to db
+
+    return cari_menu(menu_id)
