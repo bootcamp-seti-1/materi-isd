@@ -77,9 +77,26 @@ def batalkan_pesanan(order_id: int):
 
 @router.get("", response_model=list[Order])
 def daftar_pesanan(status: StatusPesanan | None = None):
-    raise HTTPException(status_code=501, detail="Belum dibuat")
+    if status is not None:
+        return fetch_all(
+            f"SELECT {KOLOM} FROM kantin_orders WHERE status = %s ORDER BY id",
+            (status,),
+        )
+    return fetch_all(f"SELECT {KOLOM} FROM kantin_orders ORDER BY id")
 
 
 @laporan_router.get("", response_model=Laporan)
 def laporan():
-    raise HTTPException(status_code=501, detail="Belum dibuat")
+    row = fetch_one(
+        """
+        SELECT
+            COUNT(*) AS jumlah_pesanan,
+            COALESCE(SUM(total), 0) AS pendapatan
+        FROM kantin_orders
+        WHERE status = 'baru'
+        """
+    )
+    return {
+        "jumlah_pesanan": int(row["jumlah_pesanan"]) if row else 0,
+        "pendapatan": int(row["pendapatan"]) if row else 0,
+    }
