@@ -60,35 +60,13 @@ def buat_task(body: TaskCreate):
 
 @router.put("/{task_id}", response_model=Task)
 def ganti_task(task_id: int, body: TaskCreate):
-    
-    task = cari_task(task_id)
+    cari_task(task_id)
     pastikan_project_ada(body.project_id)
-
-    # TODO
-    execute("")
-    return task
-
-
-@router.patch("/{task_id}", response_model=Task)
-def ubah_sebagian_task(task_id: int, body: TaskUpdate):
-    cari_task(task_id)
-    perubahan = body.model_dump(exclude_unset=True)
-
-    tidak_boleh_null = [k for k, v in perubahan.items() if v is None and k != "due_date"]
-    if tidak_boleh_null:
-        raise HTTPException(
-            status_code=422,
-            detail=f"Field {', '.join(tidak_boleh_null)} tidak boleh null",
-        )
-    if "project_id" in perubahan:
-        pastikan_project_ada(perubahan["project_id"])
-
-    if perubahan:
-        set_sql = ", ".join(f"{kolom} = %s" for kolom in perubahan)
-        execute(
-            f"UPDATE tasks SET {set_sql} WHERE id = %s",
-            (*perubahan.values(), task_id),
-        )
+    execute(
+        "UPDATE tasks SET project_id = %s, title = %s, status = %s, "
+        "priority = %s, due_date = %s WHERE id = %s",
+        (body.project_id, body.title, body.status, body.priority, body.due_date, task_id),
+    )
     return cari_task(task_id)
 
 
@@ -113,3 +91,10 @@ def ubah_sebagian_task(task_id: int, body: TaskUpdate):
             (*perubahan.values(), task_id),
         )
     return cari_task(task_id)
+
+
+@router.delete("/{task_id}", status_code=204)
+def hapus_task(task_id: int):
+    jumlah = execute("DELETE FROM tasks WHERE id = %s", (task_id,))
+    if jumlah == 0:
+        raise HTTPException(status_code=404, detail=f"Task {task_id} tidak ditemukan")
